@@ -1,11 +1,8 @@
 (let ((n (read)))
-  (loop with end = nil
-        collect (loop for i from 2 while (<= (* i i) n)
-                      when (zerop (mod n i))
-                        do (setf n (/ n i))
-                           (return i)
-                      finally (setf end t)
-                              (return n))
+  (loop for i from 2 while (<= (* i i) n)
+        append (loop while (zerop (mod n i))
+                     do (setf n (/ n i))
+                     collect i)
           into lst
-        until end
-        finally (format t "~{~a ~}" lst)))
+        finally (when (<= 2 n) (setf lst (append lst (list n))))
+                (format t "~{~a ~}" lst)))
