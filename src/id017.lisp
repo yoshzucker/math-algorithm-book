@@ -1,5 +1,5 @@
-(defun gcm (a b)
-  "greatest common multiple"
+(defun my-gcd (a b)
+  "greatest common devisor"
   (loop while (plusp (min a b))
         do (if (< a b)
                (setf b (mod b a))
@@ -8,7 +8,7 @@
 
 (defun my-lcm (a b)
   "least common multiple"
-  (/ (* a b) (gcm a b)))
+  (/ (* a b) (my-gcd a b)))
 
 (let* ((n (read))
        (al (loop repeat n collect (read))))
