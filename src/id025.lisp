@@ -1,0 +1,5 @@
+(let* ((n (read))
+       (ai (loop repeat n collect (read)))
+       (bi (loop repeat n collect (read))))
+  (print (float (+ (/ (* (reduce #'+ ai) 2) 6)
+                   (/ (* (reduce #'+ bi) 4) 6)))))
