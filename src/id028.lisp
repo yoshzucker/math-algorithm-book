@@ -1,5 +1,6 @@
 (let* ((n (read))
-       (hi (loop repeat n collect (read))))
+       (hi (make-array n :fill-pointer 0)))
+  (loop repeat n do (vector-push (read) hi))
   (loop for i from 2 below n with dp = (make-array n :initial-element 0)
           initially (setf (aref dp 1) (abs (- (elt hi 1) (elt hi 0))))
         do (setf (aref dp i)
