@@ -1,0 +1,12 @@
+(let* ((n (read))
+       (s (read))
+       (ai (loop repeat n collect (read))))
+  (loop for i below n
+        with dp = (make-array (list (1+ n) (1+ s)) :initial-element nil)
+          initially (setf (aref dp 0 0) t)
+        do (loop for j to s with a = (elt ai i)
+                 do (setf (aref dp (1+ i) j)
+                          (if (< j a)
+                              (aref dp i j)
+                              (or (aref dp i j) (aref dp i (- j a))))))
+        finally (format t "~a" (if (aref dp n s) "Yes" "No"))))
