@@ -1,0 +1,13 @@
+(let* ((n (read))
+       (x (read))
+       (ai (make-array n :initial-contents (loop repeat n collect (read)))))
+  (loop while (<= left right)
+        with left = 1 and right = n and ai = (sort ai #'<)
+        do (let ((mid (floor (+ left right) 2)))
+             (cond ((= x (elt ai mid))
+                    (return (format t "Yes")))
+                   ((< x (elt ai mid))
+                    (setf right (1- mid)))
+                   (t
+                    (setf left (1+ mid)))))
+        finally (format t "No")))
